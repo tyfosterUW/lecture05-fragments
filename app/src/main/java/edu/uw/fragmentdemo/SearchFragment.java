@@ -52,13 +52,13 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
 
         final EditText text = (EditText)rootView.findViewById(R.id.txtSearch);
 
-
-        Button searchButton = (Button) rootView.findViewById(R.id.btnSearch);
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        Button button = (Button)rootView.findViewById(R.id.btnSearch);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 String searchTerm = text.getText().toString();
                 callback.onSearchSubmitted(searchTerm);

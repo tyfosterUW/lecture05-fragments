@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
         vPager = (ViewPager) findViewById(R.id.pageViewer);
         vPagerAdapter = new MoviePagerAdapter(getSupportFragmentManager());
         vPager.setAdapter(vPagerAdapter);
+
+        searchFragment = SearchFragment.newInstance();
     }
 
 
@@ -50,17 +52,21 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.On
 
     @Override
     public void onMovieSelected(Movie movie) {
-        DetailFragment detailFragment = DetailFragment.newInstance(movie.toString(), movie.imdbId);
+        detailFragment = DetailFragment.newInstance(movie.toString(), movie.imdbId);
+        vPagerAdapter.notifyDataSetChanged();
+        vPager.setCurrentItem(2);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, detailFragment, null)
-                .addToBackStack(null)
-                .commit();
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.container, detailFragment, null)
+//                .addToBackStack(null)
+//                .commit();
     }
 
     @Override
     public void onSearchSubmitted(String searchTerm) {
-
+        moviesFragment = MoviesFragment.newInstance(searchTerm);
+        vPagerAdapter.notifyDataSetChanged();
+        vPager.setCurrentItem(1);
     }
 
     private class MoviePagerAdapter extends FragmentStatePagerAdapter {
